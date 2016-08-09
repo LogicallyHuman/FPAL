@@ -15,7 +15,7 @@
     2)Interpret each line                                   |   NO
     3)Locate Other Files                                    |   NO
     4)Go to step 1 until no files remain                    |
-    5)Index Variables                                       |   NO
+    5)Index Variables                                       |   YES
     6)Index Defines                                         |   NO
     7)Index Functions                                       |   NO
     8)Allocate addresses for variables                      |   NO

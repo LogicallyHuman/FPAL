@@ -124,6 +124,7 @@ void SourceFile::allocateVariables() {
 }
 
 
+
 int SourceFile::getLineCount() {
 	return this->lineCount;
 }

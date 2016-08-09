@@ -150,6 +150,7 @@
     <Text Include="testFPAL.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="code_generation.h" />
     <ClInclude Include="exceptions.h" />
     <ClInclude Include="instructions.h" />
     <ClInclude Include="interpreter.h" />
@@ -158,6 +159,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="code_generation.cpp" />
     <ClCompile Include="instructions.cpp" />
     <ClCompile Include="interpreter.cpp" />
     <ClCompile Include="main.cpp" />

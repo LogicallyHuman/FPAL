@@ -12,6 +12,8 @@ struct variable {
 	int address;
 };
 
+
+
 class SourceFile{
 private:
 
@@ -21,9 +23,11 @@ private:
 	std::string * lines;
 	lineType * lineTypes;
 	int getOpCode(int line);
-
+	
 
 public:
+	int defineCount = 0;
+	std::string defines;
 	int globalVariableCount = 0;
 	int localFileVariableCount = 0;
 	variable * variables;
