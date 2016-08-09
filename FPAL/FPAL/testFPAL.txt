@@ -1,0 +1,39 @@
+;This is a valid example program
+;
+;For testing the assembler
+;
+;This program reads contents of PORTA, adds it to contents of PORTB
+;Then subtracts from the result a custom number, and leaves the result in the ACC.
+;If the result is greater than 8 bit, it leaves 0 in the ACC.
+;
+
+.dec	a  
+.dec	b  
+.dec	c  
+
+
+
+.def postSub, 20		 ;postSub = 20
+
+
+.main
+
+	  mov   porta,	 acc		 ;a = porta
+	  sav   a			 ;
+	  mov   portb,	 acc		 ;b = portb
+	  sav   b			 ;
+	  ld    b			 ;c = a + b
+	  mov   acc, 	 b    	  	 ;
+	  ld    a			 ;
+	  alu   add		         ;
+	  sav   c			 ;
+	  sti   postSub  		 ;c = c - postSub
+	  mov   acc, b		         ;
+	  ld    c			 ;
+	  alu   sub		         ;
+	  jc    overflow		 ;if not overflowed
+	  jmp   end			 ;
+overflow: sti 0x00			 ;if overflowed
+end:	  jmp end			 ;halt program
+
+.endfunc
