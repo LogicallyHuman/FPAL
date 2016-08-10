@@ -8,13 +8,15 @@ enum ALUOperations {alu_add, alu_sub, alu_inc, alu_dec, alu_lsh, alu_rsh, alu_an
 
 enum Registers {acc, b, mar_lsb, mar_msb};
 
-class Instruction{
+enum Instructions {nop, sti, alu, mov, ld, sto, jmp, jeq, jc, jz};
+
+class AssembledInstruction{
     public:
         virtual uint16_t buildInstruction() = 0;
         static char getOpCodeForInstruction(std::string instructionMnemonic);
 };
 
-class NoOperation : public Instruction{
+class NoOperation : public AssembledInstruction{
 public:
     uint16_t buildInstruction();
 private:
@@ -22,7 +24,7 @@ private:
     const static char operands[];
 };
 
-class StoreImmediate : public Instruction{
+class StoreImmediate : public AssembledInstruction{
 public:
     uint8_t immediateToSet;
     uint16_t buildInstruction();
@@ -31,7 +33,7 @@ private:
     static const char operands[];
 };
 
-class ALUOperation : public Instruction{
+class ALUOperation : public AssembledInstruction{
 public:
     uint8_t aluFunctionToExecute;
     bool carryFromPrevOp;
@@ -42,7 +44,7 @@ private:
 };
 
 
-class StoreToRAM : public Instruction{
+class StoreToRAM : public AssembledInstruction{
 public:
     uint16_t LsbAddress;
     bool useLsbRegister;
@@ -52,7 +54,7 @@ private:
     static const char operands[];
 };
 
-class LoadFromRAM : public Instruction{
+class LoadFromRAM : public AssembledInstruction{
 public:
     uint8_t LsbAddress;
     bool useLsbRegister;
@@ -62,7 +64,7 @@ private:
     static const char operands[];
 };
 
-class Move : public Instruction{
+class Move : public AssembledInstruction{
 public:
     uint8_t regSrc;
     uint8_t regDst;
@@ -73,7 +75,7 @@ private:
 };
 
 
-class Jump : public Instruction{
+class Jump : public AssembledInstruction{
 public:
     uint16_t promLsbTarget;
     bool useLsbRegister;
@@ -83,7 +85,7 @@ private:
     static const char operands[];
 };
 
-class JumpIfEqual : public Instruction{
+class JumpIfEqual : public AssembledInstruction{
 public:
     uint16_t promLsbTarget;
     bool useLsbRegister;
@@ -93,7 +95,7 @@ private:
     static const char operands[];
 };
 
-class JumpIfZero : public Instruction{
+class JumpIfZero : public AssembledInstruction{
 public:
     uint16_t promLsbTarget;
     bool useLsbRegister;

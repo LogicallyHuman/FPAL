@@ -2,17 +2,27 @@
 #define PARSER_H_INCLUDED
 #include <string>
 #include "exceptions.h"
+#include "instructions.h"
+
+enum lineType {blank, define, function, endfunction, instruction, declare, label};
 
 
-enum lineType {nop, define, function, endfunction, instruction, declare, label};
-
-
-struct variable {
+struct Variable {
 	std::string name;
 	int address;
 };
 
+struct Function {
+	std::string name;
+	int size = 0;
+	char * instructions;
+};
 
+struct Instruction {
+	char opcode;
+	char operand1;
+	char operand2;
+};
 
 class SourceFile{
 private:
@@ -20,6 +30,7 @@ private:
     char * originalFile;
     int originalFileLength;
 	int lineCount;
+	Function * functions;
 	std::string * lines;
 	lineType * lineTypes;
 	int getOpCode(int line);
@@ -30,7 +41,7 @@ public:
 	std::string defines;
 	int globalVariableCount = 0;
 	int localFileVariableCount = 0;
-	variable * variables;
+	Variable * variables;
 	int getLineCount();
 	int getLineType(int lineNum);
 	std::string getLine(int lineNum);

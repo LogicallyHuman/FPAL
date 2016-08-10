@@ -48,7 +48,7 @@ void SourceFile::identifyLines(){//IT IDENTIFIES POSSIBLE LINE MEANING, IT DOES 
 		pos = 0;
 		word = "";
 		if (this->lines[i].length() == 0) {//If line is empty, it's a nop
-			this->lineTypes[i] = nop;
+			this->lineTypes[i] = blank;
 			continue;
 		}
 		while ((this->lines[i][pos] == ' ') || (this->lines[i][pos] == '\t')){
@@ -81,7 +81,7 @@ void SourceFile::identifyLines(){//IT IDENTIFIES POSSIBLE LINE MEANING, IT DOES 
 			}
 		}
 		else if (this->lines[i][pos] == ';') {//If it starts with a ';', it's a comment line, (nop)
-			this->lineTypes[i] = nop;
+			this->lineTypes[i] = blank;
 		}
 		else if (this->lines[i][pos] == ':') {
 			if (!inFunction)throw EXCEPTION_LABEL_OUT_OF_FUNCTION;
@@ -96,7 +96,7 @@ void SourceFile::identifyLines(){//IT IDENTIFIES POSSIBLE LINE MEANING, IT DOES 
 }
 
 void SourceFile::allocateVariables() {
-	this->variables = new variable[this->localFileVariableCount];
+	this->variables = new Variable[this->localFileVariableCount];
 	int pos = 0;
 	this->globalVariableCount = 0;
 	int vari = 0;
@@ -122,7 +122,6 @@ void SourceFile::allocateVariables() {
 		}
 	}
 }
-
 
 
 int SourceFile::getLineCount() {

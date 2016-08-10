@@ -37,7 +37,7 @@
 std::string foo(int a) {
 	switch (a)
 	{
-	case nop:
+	case blank:
 		return "nop        ";
 	case define:
 		return "define     ";
